@@ -1,35 +1,10 @@
-// SVPWM.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-#include <stdio.h>
-#include <math.h>
-#define PI 3.141592653f//;
-#define one_by_sqrt6 0.40824829f
-#define one_by_sqrt2 0.70710678f
-#define sqrt2_by_sqrt3 0.816496581f
-#define pi_by_3 1.04719755f
-#define one_by_pi_by_3 0.9549296596425f
-#define angle_dt (0.0314159f*1.0)
-#define one_by_sqrt3 0.577350269f
-float angle = 2;//actual angle of PLL alfa beta vectors
-float U_dc = 800;
-float Ud = 300;
-float Uq = 100;
-
-
-struct SVPWM_vectors {
-	float d1d4;
-	float d2d5;
-	float d3d6;
-	float t0;
-	float t1;
-	float t2;
-}svpwm;
-
-typedef struct SVPWM_vectors SVPWM;
-
-
-
+/*
+ * SVPWM.c
+ *
+ *  Created on: Nov 25, 2024
+ *      Author: brzycki
+ */
+#include "SVPWM.h"
 SVPWM svPWM(float Ud, float Uq, float theta, float U_dc)
 {
 	SVPWM duty_cycles;
@@ -57,7 +32,10 @@ SVPWM svPWM(float Ud, float Uq, float theta, float U_dc)
 
 	u_alfa = Ud * cosf(theta) - Uq * sinf(theta);
 	u_beta = Ud * sinf(theta) + Uq * cosf(theta);
+
 	phi = atan2f(-u_beta, -u_alfa) + PI;
+
+	//Calculate two main vectors V1 and V2 and their alfa beta component parts
 	sektor = floorf(phi * one_by_pi_by_3);
 	switch (sektor)
 	{
@@ -73,6 +51,9 @@ SVPWM svPWM(float Ud, float Uq, float theta, float U_dc)
 		u_alfa_2 = -one_by_sqrt6 * U_dc;
 		u_beta_2 = one_by_sqrt2 * U_dc;
 		break;
+		//etc...
+
+
 	case 2:
 		u_alfa_1 = -one_by_sqrt6 * U_dc;
 		u_beta_1 = one_by_sqrt2 * U_dc;
@@ -162,14 +143,6 @@ SVPWM svPWM(float Ud, float Uq, float theta, float U_dc)
 	duty_cycles.t2 = time2_vector;
 	return duty_cycles;
 }
-int main()
-{
-	angle = angle + angle_dt;
-	if (angle >= 2 * PI)angle = angle - 2 * PI;
-	if (angle < 0) angle = angle + 2 * PI; // shift 2pi for negative values
-	svpwm = svPWM(Ud, Uq, angle, U_dc);
 
-	printf("T[1]: %f, T[2]: %f, T[3]: %f", svpwm.d1d4, svpwm.d2d5, svpwm.d3d6);
-}
 
 
