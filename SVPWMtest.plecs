@@ -53,7 +53,7 @@ Plecs {
   ScriptsDialogGeometry ""
   ScriptsDialogSplitterPos "0"
   Schematic {
-    Location      [2560, 23; 4794, 1173]
+    Location      [0, 24; 2234, 1174]
     ZoomFactor    1
     SliderPosition [0, 0]
     ShowBrowser   off
@@ -293,7 +293,7 @@ Plecs {
       TimeRange     "0"
       ScrollingMode "1"
       SingleTimeAxis "1"
-      Open          "1"
+      Open          "0"
       Ts            "-1"
       SampleLimit   "0"
       XAxisLabel    "Time / s"
@@ -690,7 +690,7 @@ Plecs {
       }
       Parameter {
         Variable      "NumOutputs"
-        Value         "[3 5]"
+        Value         "[3 3]"
         Show          off
       }
       Parameter {
@@ -810,7 +810,7 @@ Plecs {
 "\n"
 "u_alfa = Ud * cosf(angle) - Uq * sinf(angle);\n"
 "u_beta = Ud * sinf(angle) + Uq * cosf(angle);\n"
-"theta=atan2f(u_beta,u_alfa) + PI;\n"
+"theta=atan2f(-u_beta,-u_alfa) + PI;\n"
 "sektor = floorf(theta * one_by_pi_by_3);\n"
 "switch (sektor)\n"
 "{\n"
@@ -853,10 +853,10 @@ Plecs {
 "}\n"
 "\n"
 "\n"
-"time1_vector = -(u_alfa * u_beta_2 - u_beta * u_alfa_2) / (u_alfa_1 * u_beta_"
-"2 - u_beta_1 * u_alfa_2);\n"
-"time2_vector = -((-u_alfa * u_beta_1 + u_beta * u_alfa_1) /(u_alfa_1 * u_beta"
-"_2 - u_beta_1 * u_alfa_2));\n"
+"time1_vector = (u_alfa * u_beta_2 - u_beta * u_alfa_2) / (u_alfa_1 * u_beta_2"
+" - u_beta_1 * u_alfa_2);\n"
+"time2_vector = ((-u_alfa * u_beta_1 + u_beta * u_alfa_1) /(u_alfa_1 * u_beta_"
+"2 - u_beta_1 * u_alfa_2));\n"
 "time0_vector = 1 -  time1_vector -time2_vector;\n"
 "\n"
 "\n"
@@ -1354,7 +1354,7 @@ Plecs {
       TimeRange     "0.0"
       ScrollingMode "1"
       SingleTimeAxis "1"
-      Open          "1"
+      Open          "0"
       Ts            "-1"
       SampleLimit   "0"
       XAxisLabel    "Time / s"
@@ -1805,7 +1805,7 @@ Plecs {
     }
     Component {
       Type          Constant
-      Name          "Udc1"
+      Name          "Ud Uq"
       Show          on
       Position      [395, 380]
       Direction     right
@@ -1911,11 +1911,11 @@ Plecs {
       Direction     up
       Flipped       off
       LabelPosition south
-      Location      [0, 24; 2234, 1232]
+      Location      [0, 24; 2234, 1241]
       State         "AAAA/wAAAAD9AAAAAgAAAAEAAAAAAAAAAPwCAAAAA/sAAAAQAFoAbwBvA"
 "G0AQQByAGUAYQAAAAAA/////wAAADEA////+wAAABQAUwBhAHYAZQBkAFYAaQBlAHcAcwAAAAAA//"
 "///wAAAGMA////+wAAAAwAVAByAGEAYwBlAHMAAAAAAP////8AAABjAP///wAAAAMAAAAAAAAAAPw"
-"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAACLoAAASZAAAA"
+"BAAAAAfsAAAAUAEQAYQB0AGEAVwBpAGQAZwBlAHQAAAAAAP////8AAABEAP///wAACLoAAASiAAAA"
 "BAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAOAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAA"
 "AAAAA=="
       SavedViews    "AAAAAgAAAAA="
@@ -2394,7 +2394,7 @@ Plecs {
     }
     Connection {
       Type          Signal
-      SrcComponent  "Udc1"
+      SrcComponent  "Ud Uq"
       SrcTerminal   1
       DstComponent  "SVPWMf"
       DstTerminal   2
@@ -2431,4 +2431,4 @@ Plecs {
     }
   }
 }
-DemoSignature "5gK08aUalw1UNB8f24o0lOYuF/KyvgVyKnsNNFZHv/Q="
+DemoSignature "Vw0Al1wKKzNBD2p+hMNdVBtgAPxoOiG8lOIHAd9tgTM="
