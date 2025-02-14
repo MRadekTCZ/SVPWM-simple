@@ -25,6 +25,7 @@ struct SVPWM_vectors {
     float t0;
     float t1;
     float t2;
+    float mod_index;
 };
 
 typedef struct SVPWM_vectors SVPWM;
