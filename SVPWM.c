@@ -25,10 +25,17 @@ SVPWM svPWM(float Ud, float Uq, float theta, float U_dc)
 	unsigned short int T2[3 + 1];
 	unsigned short int T0[3 + 1];
 	float time1_vector, time2_vector, time0_vector;
-
-
-
-
+	float Uvmax;
+	float Udq;
+	
+	//Normalization of the vector if the available range is exceeded
+	Uvmax =  U_dc*one_by_sqrt3;
+	Udq = sqrtf(Ud*Ud+Uq*Uq);
+	if(Udq>=Uvmax)
+	{
+	Ud = Uvmax/Udq *Ud;
+	Uq = Uvmax/Udq *Uq;
+	}
 
 	u_alfa = Ud * cosf(theta) - Uq * sinf(theta);
 	u_beta = Ud * sinf(theta) + Uq * cosf(theta);
