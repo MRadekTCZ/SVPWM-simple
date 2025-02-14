@@ -36,7 +36,8 @@ SVPWM svPWM(float Ud, float Uq, float theta, float U_dc)
 	Ud = Uvmax/Udq *Ud;
 	Uq = Uvmax/Udq *Uq;
 	}
-
+	modulation_index = Udq/Uvmax;
+	
 	u_alfa = Ud * cosf(theta) - Uq * sinf(theta);
 	u_beta = Ud * sinf(theta) + Uq * cosf(theta);
 
@@ -148,6 +149,7 @@ SVPWM svPWM(float Ud, float Uq, float theta, float U_dc)
 	duty_cycles.t0 = time0_vector;
 	duty_cycles.t1 = time1_vector;
 	duty_cycles.t2 = time2_vector;
+	duty_cycles.mod_index = modulation_index;
 	return duty_cycles;
 }
 
