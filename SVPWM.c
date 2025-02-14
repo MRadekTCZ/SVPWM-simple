@@ -27,6 +27,7 @@ SVPWM svPWM(float Ud, float Uq, float theta, float U_dc)
 	float time1_vector, time2_vector, time0_vector;
 	float Uvmax;
 	float Udq;
+	float modulation_index;
 	
 	//Normalization of the vector if the available range is exceeded
 	Uvmax =  U_dc*one_by_sqrt3;
